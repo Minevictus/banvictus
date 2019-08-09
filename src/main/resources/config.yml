@@ -14,3 +14,6 @@ colours:
 webhooks:
   main: "https://ptb.discordapp.com/api/webhooks/608731599160344590/okk9oRQgIwsveTH5mV5MimUuy7RRigHw4iig5FA8rCCTubMHdl2Knfy0r-2_6OBt9r4-"
   silent: ""
+
+  # also works for ban, mute, and kick
+  warn: "https://ptb.discordapp.com/api/webhooks/609336227992436737/N0qiCLDb5Q80VoZyUJ4PqU3O8AKN9DL7XZGHCxHYdQ6kHSWAYwU_DLCgrY6WmR5e2obx"

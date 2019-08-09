@@ -34,6 +34,12 @@ class ReloadCommand(private val main: Banvictus) : Command("banvictus-reload") {
             } else {
                 handler = BungeeFieldEventListener(this)
             }
+
+            for (s in arrayOf("warn", "kick", "mute", "ban")) {
+                config.getString("webhooks.$s")?.let {
+                    otherHooks[it] = TemmieWebhook(it)
+                }
+            }
         }
         sender.sendMessage("reloaded")
     }

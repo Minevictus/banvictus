@@ -16,7 +16,7 @@ class BungeeFieldEventListener(private val main: Banvictus) : EntryHandler {
         val hook = if (entry.isSilent) {
             main.silentHook
         } else {
-            main.mainHook
+            main.otherHooks[entry.type] ?: main.mainHook
         } ?: return
 
         val colour = Integer.valueOf(main.config.getString("colours.${entry.type}"), 16)

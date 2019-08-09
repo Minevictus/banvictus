@@ -17,6 +17,7 @@ class Banvictus : Plugin() {
 
     val gson = Gson()
 
+    val otherHooks = mutableMapOf<String, TemmieWebhook>()
     var mainHook: TemmieWebhook? = null
     var silentHook: TemmieWebhook? = null
     var avatar: String = ""
@@ -55,6 +56,12 @@ class Banvictus : Plugin() {
 
         if (!config.getBoolean("use-embed-fields")) {
             handler = BungeeTextEventListener(this)
+        }
+
+        for (s in arrayOf("warn", "kick", "mute", "ban")) {
+            config.getString("webhooks.$s")?.let {
+                otherHooks[it] = TemmieWebhook(it)
+            }
         }
 
         proxy.pluginManager.registerCommand(this, ReloadCommand(this))
