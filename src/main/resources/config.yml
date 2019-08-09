@@ -1,0 +1,16 @@
+use-embed-fields: true
+avatar: "https://www.harborfreight.com/media/catalog/product/i/m/image_21582.jpg"
+
+footer:
+  icon: "https://www.harborfreight.com/media/catalog/product/i/m/image_21582.jpg"
+  text: "Minevictus"
+
+colours:
+  ban: "FF0000"
+  mute: "0000FF"
+  warn: "FF9100"
+  kick: "FFD700"
+
+webhooks:
+  main: "https://ptb.discordapp.com/api/webhooks/608731599160344590/okk9oRQgIwsveTH5mV5MimUuy7RRigHw4iig5FA8rCCTubMHdl2Knfy0r-2_6OBt9r4-"
+  silent: ""

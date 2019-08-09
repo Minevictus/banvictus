@@ -1,0 +1,8 @@
+name: Banvictus
+author: Proximyst
+description: Logging all ban entries submitted.
+version: @VERSION@
+api-version: "1.14"
+main: com.proximyst.banvictus.bukkit.Banvictus
+depend:
+  - LiteBans
