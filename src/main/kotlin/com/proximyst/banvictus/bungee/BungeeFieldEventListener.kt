@@ -44,7 +44,7 @@ class BungeeFieldEventListener(private val main: Banvictus) : EntryHandler {
                     ""
                 } else {
                     "Temporary "
-                }}${entry.type.capitalize()}"
+                }}${entry.type}".capitalize()
             )
             .build()
 

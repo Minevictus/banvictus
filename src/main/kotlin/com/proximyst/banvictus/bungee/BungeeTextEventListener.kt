@@ -35,7 +35,7 @@ class BungeeTextEventListener(private val main: Banvictus): EntryHandler {
             ""
         } else {
             "Temporary "
-        }}${entry.type.capitalize()}"
+        }}${entry.type}".capitalize()
 
         val text = """
             |Punishment: $punishment
