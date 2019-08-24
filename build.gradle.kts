@@ -69,10 +69,12 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
-    target = tasks["shadowJar"] as ShadowJar
+val shadowJar = tasks["shadowJar"] as ShadowJar
+val relocateTask = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
+    target = shadowJar
     prefix = "com.proximyst.${project.name}.dependencies"
-}.dependsOn("shadowJar")
+}
+shadowJar.dependsOn(relocateTask)
 
 tasks.processResources.configure {
     from("src/main/resources") {
