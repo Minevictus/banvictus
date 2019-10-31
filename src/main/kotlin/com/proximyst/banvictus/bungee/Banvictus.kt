@@ -1,7 +1,7 @@
 package com.proximyst.banvictus.bungee
 
-import com.google.gson.Gson
 import com.mrpowergamerbr.temmiewebhook.TemmieWebhook
+import com.proximyst.banvictus.EntryHandler
 import litebans.api.Entry
 import litebans.api.Events
 import net.md_5.bungee.api.plugin.Plugin
@@ -15,8 +15,6 @@ class Banvictus : Plugin() {
     lateinit var config: Configuration
         private set
 
-    val gson = Gson()
-
     val otherHooks = mutableMapOf<String, TemmieWebhook>()
     var mainHook: TemmieWebhook? = null
     var silentHook: TemmieWebhook? = null
@@ -25,7 +23,7 @@ class Banvictus : Plugin() {
     var footerIcon: String = ""
     var footerText: String = ""
 
-    var handler: EntryHandler = BungeeFieldEventListener(this)
+    var handler: EntryHandler<Banvictus> = TextEntryHandler()
 
     override fun onEnable() {
         if (!dataFolder.exists()) {
@@ -54,10 +52,6 @@ class Banvictus : Plugin() {
         footerIcon = config.getString("footer.icon") ?: ""
         footerText = config.getString("footer.text") ?: ""
 
-        if (!config.getBoolean("use-embed-fields")) {
-            handler = BungeeTextEventListener(this)
-        }
-
         for (s in arrayOf("warn", "kick", "mute", "ban")) {
             config.getString("webhooks.$s")?.let {
                 otherHooks[it] = TemmieWebhook(it)
@@ -68,7 +62,9 @@ class Banvictus : Plugin() {
 
         Events.get().register(object : Events.Listener() {
             override fun entryAdded(entry: Entry) {
-                handler.handle(entry)
+                this@Banvictus.proxy.scheduler.runAsync(this@Banvictus) {
+                    handler.handle(entry, this@Banvictus)
+                }
             }
         })
     }

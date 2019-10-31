@@ -29,18 +29,21 @@ class ReloadCommand(private val main: Banvictus) : Command("banvictus-reload") {
             footerIcon = config.getString("footer.icon") ?: ""
             footerText = config.getString("footer.text") ?: ""
 
-            if (!config.getBoolean("use-embed-fields")) {
-                handler = BungeeTextEventListener(this)
-            } else {
-                handler = BungeeFieldEventListener(this)
-            }
-
             for (s in arrayOf("warn", "kick", "mute", "ban")) {
                 config.getString("webhooks.$s")?.let {
                     otherHooks[it] = TemmieWebhook(it)
                 }
             }
         }
-        sender.sendMessage("reloaded")
+
+        sender.sendMessage(
+            *ComponentBuilder("Reloaded ")
+                .color(ChatColor.GREEN)
+                .append("Banvictus")
+                .color(ChatColor.RED)
+                .append("' configuration.")
+                .color(ChatColor.GREEN)
+                .create()
+        )
     }
 }
