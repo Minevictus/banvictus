@@ -56,7 +56,7 @@ repositories{
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    compileOnly("com.destroystokyo.paper:paper-api:1.14.4-R0.1-SNAPSHOT")
+//    compileOnly("com.destroystokyo.paper:paper-api:1.14.4-R0.1-SNAPSHOT")
     compileOnly("net.md-5:bungeecord-api:1.14-SNAPSHOT")
     compile("com.github.MrPowerGamerBR:TemmieWebhook:59de40c3b6")
     compileOnly("litebans:api:0.+")

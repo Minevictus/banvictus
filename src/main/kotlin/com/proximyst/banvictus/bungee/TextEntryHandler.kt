@@ -6,7 +6,7 @@ import com.mrpowergamerbr.temmiewebhook.embed.FooterEmbed
 import com.proximyst.banvictus.EntryHandler
 import com.proximyst.banvictus.fetching.AshconApi
 import litebans.api.Entry
-import org.bukkit.ChatColor
+import net.md_5.bungee.api.ChatColor
 import java.text.DateFormat
 import java.util.*
 
