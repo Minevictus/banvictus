@@ -18,16 +18,15 @@ object AshconApi {
     fun fetchUser(query: String): AshconUser? {
         val cachedValue = cache.getIfPresent(query)
         if (cachedValue != null) {
-            println("found in cache")
             return cachedValue
         }
 
         val url = "$API_USER/${query.replace("-", "")}"
         val response = HttpRequest.get(url)
         if (!response.ok()) {
-            println("non ok response")
             return null
         }
+
         return runCatching {
             GSON.fromJson(response.body(), AshconUser::class.java)
         }
