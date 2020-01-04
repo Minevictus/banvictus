@@ -5,6 +5,8 @@ import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.CommandSender
 import net.md_5.bungee.api.chat.ComponentBuilder
 import net.md_5.bungee.api.plugin.Command
+import net.md_5.bungee.config.ConfigurationProvider
+import net.md_5.bungee.config.YamlConfiguration
 
 class ReloadCommand(private val main: Banvictus) : Command("banvictus-reload") {
     override fun execute(sender: CommandSender, args: Array<out String>?) {
@@ -18,6 +20,9 @@ class ReloadCommand(private val main: Banvictus) : Command("banvictus-reload") {
         }
 
         main.apply {
+            config = ConfigurationProvider.getProvider(YamlConfiguration::class.java)
+                .load(configFile)
+
             mainHook = TemmieWebhook(config.getString("webhooks.main"))
             silentHook = config.getString("webhooks.silent")?.let {
                 TemmieWebhook(it)

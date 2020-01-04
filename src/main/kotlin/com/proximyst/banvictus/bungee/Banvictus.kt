@@ -12,8 +12,8 @@ import java.io.File
 import java.nio.file.Files
 
 class Banvictus : Plugin() {
+    lateinit var configFile: File
     lateinit var config: Configuration
-        private set
 
     val otherHooks = mutableMapOf<String, TemmieWebhook>()
     var mainHook: TemmieWebhook? = null
@@ -25,13 +25,20 @@ class Banvictus : Plugin() {
 
     var handler: EntryHandler<Banvictus> = TextEntryHandler()
 
+    val litebansListener = object : Events.Listener() {
+        override fun entryAdded(entry: Entry) {
+            this@Banvictus.proxy.scheduler.runAsync(this@Banvictus) {
+                handler.handle(entry, this@Banvictus)
+            }
+        }
+    }
+
     override fun onEnable() {
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
 
-        val configFile = File(dataFolder, "config.yml")
-
+        configFile = File(dataFolder, "config.yml")
         if (!configFile.exists()) {
             getResourceAsStream("config.yml").use {
                 Files.copy(it, file.toPath())
@@ -60,12 +67,10 @@ class Banvictus : Plugin() {
 
         proxy.pluginManager.registerCommand(this, ReloadCommand(this))
 
-        Events.get().register(object : Events.Listener() {
-            override fun entryAdded(entry: Entry) {
-                this@Banvictus.proxy.scheduler.runAsync(this@Banvictus) {
-                    handler.handle(entry, this@Banvictus)
-                }
-            }
-        })
+        Events.get().register(litebansListener)
+    }
+
+    override fun onDisable() {
+        Events.get().unregister(litebansListener)
     }
 }

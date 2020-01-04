@@ -3,6 +3,5 @@ author: Proximyst
 description: Logging all ban entries submitted.
 version: @VERSION@
 main: com.proximyst.banvictus.bungee.Banvictus
-api-version: "1.14"
 depends:
   - LiteBans
