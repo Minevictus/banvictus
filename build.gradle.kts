@@ -49,6 +49,11 @@ repositories{
         }
     }
 
+    maven {
+        name = "proxi-nexus"
+        url = uri("https://nexus.proximyst.com/repository/maven-public/")
+    }
+
     jcenter()
     mavenCentral()
     mavenLocal() // i hate you, ruan
