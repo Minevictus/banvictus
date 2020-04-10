@@ -1,0 +1,18 @@
+= banvictus
+
+The LiteBans history logger using webhooks.
+
+== Compile
+
+Requirements:
+
+. Java 8-13 JDK
+
+Method:
+
+. Run `./gradlew shadowJar`.
+. Find the jar suffixed `-all` in `build/libs`.
+
+== Usage
+
+Plop in the `plugins` directory on a BungeeCord server.
